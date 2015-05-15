@@ -1,2 +1,2 @@
 # cbs-numarataj
-Muğla için tasarlana saha takip formu
+Muğla için tasarlanan saha takip işlemleri.
