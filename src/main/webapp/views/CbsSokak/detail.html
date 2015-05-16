@@ -1,0 +1,67 @@
+<header ng-switch on="$location.path().indexOf('/CbsSokaks/new') > -1">
+    <h3 ng-switch-when="true">(Yeni Kayıt)</h3>
+    <h3 ng-switch-when="false">(Değiştir)</h3>
+</header>
+<form id="CbsSokakForm" name="CbsSokakForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Bir hata oluştu lütfen tekrar deneyiniz.
+    </div>
+    
+    <div class="form-group" ng-class="{'has-error': CbsSokakForm.cbsMahalle.$invalid}">
+        <label for="cbsMahalle" class="col-sm-2 control-label">Mahalle Adı</label>
+        <div id="cbsMahalleControls" class="col-sm-10">
+        <select id="cbsMahalle" name="cbsMahalle" class="form-control" ng-model="cbsMahalleSelection" ng-options="c.text for c in cbsMahalleSelectionList"  >
+            <option value="">Mahalle seçiniz.</option>
+        </select>
+        </div>
+    </div>    
+
+    <div class="form-group" ng-class="{'has-error': CbsSokakForm.adi.$invalid}">
+        <label for="adi" class="col-sm-2 control-label">Sokak Adi</label>
+        <div id="adiControls" class="col-sm-10">
+            <input id="adi" name="adi" type="text" ng-maxlength="50" class="form-control" ng-model="cbsSokak.adi" placeholder="Sokak adi giriniz."></input>
+            <span class="help-block error" ng-show="CbsSokakForm.adi.$error.maxlength">En fazla 50 Karekter!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsSokakForm.turu.$invalid}">
+        <label for="turu" class="col-sm-2 control-label">Sokak Türü</label>
+        <div id="turuControls" class="col-sm-10">
+        <select id="turu" name="turu" class="form-control" ng-model="cbsSokak.turu" ng-options="t for t in turuList"  >
+            <option value="">Sokak türü seçiniz.</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsSokakForm.kaplamaTuru.$invalid}">
+        <label for="kaplamaTuru" class="col-sm-2 control-label">Kaplama Türü</label>
+        <div id="kaplamaTuruControls" class="col-sm-10">
+        <select id="kaplamaTuru" name="kaplamaTuru" class="form-control" ng-model="cbsSokak.kaplamaTuru" ng-options="k for k in kaplamaTuruList"  >
+            <option value="">Kaplama türü seçiniz</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsSokakForm.stNo.$invalid}">
+        <label for="stNo" class="col-sm-2 control-label">Tuik No</label>
+        <div id="stNoControls" class="col-sm-10">
+            <input id="stNo" name="stNo" type="text" class="form-control" ng-model="cbsSokak.stNo" placeholder="Tuik no giriniz."></input>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsSokakForm.uavtNo.$invalid}">
+        <label for="uavtNo" class="col-sm-2 control-label">Uavt No</label>
+        <div id="uavtNoControls" class="col-sm-10">
+            <input id="uavtNo" name="uavtNo" type="number" class="form-control" ng-model="cbsSokak.uavtNo" placeholder="Uavt no giriniz."></input>
+            <span class="help-block error" ng-show="CbsSokakForm.uavtNo.$error.number">Sayısal değer girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveCbsSokak" name="saveCbsSokak" class="btn btn-primary" ng-disabled="isClean() || CbsSokakForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Kaydet</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Vazgeç</button>
+            <button id="deleteCbsSokak" name="deleteCbsSokak" class="btn btn-danger" ng-show="cbsSokak.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Sil</button>
+        </div>
+    </div>
+</form>

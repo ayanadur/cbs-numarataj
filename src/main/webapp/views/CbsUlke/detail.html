@@ -1,0 +1,41 @@
+<header ng-switch on="$location.path().indexOf('/CbsUlkes/new') > -1">
+    <h3 ng-switch-when="true">Yeni kayıt</h3>
+    <h3 ng-switch-when="false">Değiştir</h3>
+</header>
+<form id="CbsUlkeForm" name="CbsUlkeForm" class="form-horizontal" role="form">
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Bir hata oluştu.
+    </div>
+    
+    <div class="form-group" ng-class="{'has-error': CbsUlkeForm.adi.$invalid}">
+        <label for="adi" class="col-sm-2 control-label">Ülke adı</label>
+        <div id="adiControls" class="col-sm-10">
+            <input id="adi" name="adi" type="text" ng-maxlength="50" class="form-control" ng-model="cbsUlke.adi" placeholder="Ülke adı giriniz."></input>
+            <span class="help-block error" ng-show="CbsUlkeForm.adi.$error.maxlength">Max 50</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsUlkeForm.stNo.$invalid}">
+        <label for="stNo" class="col-sm-2 control-label">Tuik No</label>
+        <div id="stNoControls" class="col-sm-10">
+            <input id="stNo" name="stNo" type="number" class="form-control" ng-model="cbsUlke.stNo" placeholder="Tuik no giriniz."></input>
+            <span class="help-block error" ng-show="CbsUlkeForm.stNo.$error.number">Sayı girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsUlkeForm.uavtNo.$invalid}">
+        <label for="uavtNo" class="col-sm-2 control-label">Uavt No</label>
+        <div id="uavtNoControls" class="col-sm-10">
+            <input id="uavtNo" name="uavtNo" type="number" class="form-control" ng-model="cbsUlke.uavtNo" placeholder="Uavt no giriniz."></input>
+            <span class="help-block error" ng-show="CbsUlkeForm.uavtNo.$error.number">Sayı girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveCbsUlke" name="saveCbsUlke" class="btn btn-primary" ng-disabled="isClean() || CbsUlkeForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Kaydet</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Vazgeç</button>
+            <button id="deleteCbsUlke" name="deleteCbsUlke" class="btn btn-danger" ng-show="cbsUlke.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Sil</button>
+        </div>
+    </div>
+</form>

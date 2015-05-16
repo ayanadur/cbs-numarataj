@@ -1,0 +1,110 @@
+
+   <form id="CbsBagBirimForm" name="CbsBagBirimForm" class="form-horizontal" role="form" novalidate>
+    
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Bir hata oluştu lütfen tekrar deneyiniz.
+    </div>
+        
+    <div class="form-group">
+        <label for="cbsBina" class="col-sm-2 control-label">Bağlı Bina Id</label>
+        <div class="col-sm-10">
+        	<input id="cbsBina" name="cbsBina" class="form-control" type="text" disabled="true" ng-model="cbsBagBirim.cbsBina.id" placeholder="{{binaId}}"></input>
+        <!--
+            <select id="cbsBina" name="cbsBina" class="form-control" ng-model="search.cbsBina" ng-options="c as c.binaAdi for c in cbsBinaList">
+                <option value="">Bina Seçiniz</option>
+            </select>
+        -->
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="id" class="col-sm-2 control-label">Id</label>
+        <div class="col-sm-10">
+            <input id="id" name="id" class="form-control" type="text" disabled="true" ng-model="cbsBagBirim.id" placeholder="Yeni Kayıt!"></input>
+        </div>
+    </div>
+    
+    <div class="form-group" ng-class="{'has-error': CbsBagBirimForm.katNo.$invalid}">
+        <label for="katNo" class="col-sm-2 control-label">Kat No</label>
+        <div id="katNoControls" class="col-sm-10">
+            <input id="katNo" name="katNo" class="form-control" type="number" ng-maxlength="3" ng-model="cbsBagBirim.katNo" placeholder="Kat no giriniz." autofocus></input>
+            <span class="help-block error" ng-show="CbsBagBirimForm.katNo.$error.maxlength">En fazla 3 karekter girebilirsiniz!</span>
+        </div>
+    </div>
+       
+    <div class="form-group" ng-class="{'has-error': CbsBagBirimForm.icKapiNo.$invalid}">
+        <label for="icKapiNo" class="col-sm-2 control-label">İç Kapı No</label>
+        <div id="icKapiNoControls" class="col-sm-10">
+            <input id="icKapiNo" name="icKapiNo" type="text" ng-maxlength="10" class="form-control" ng-model="cbsBagBirim.icKapiNo" placeholder="İç kapı no giriniz." required></input>
+            <span class="help-block error" ng-show="CbsBagBirimForm.icKapiNo.$error.maxlength">En fazla 10 karekter girebilirsiniz!</span>
+        </div>
+    </div>
+        
+    <div class="form-group" ng-class="{'has-error': CbsBagBirimForm.tapuBagimsizBolumNo.$invalid}">
+        <label for="tapuBagimsizBolumNo" class="col-sm-2 control-label">Tapu Bağımsız Bölüm No</label>
+        <div id="tapuBagimsizBolumNoControls" class="col-sm-10">
+            <input id="tapuBagimsizBolumNo" name="tapuBagimsizBolumNo" type="text" ng-maxlength="10" class="form-control" ng-model="cbsBagBirim.tapuBagimsizBolumNo" placeholder="Tapu bağımsız bölüm no giriniz."></input>
+            <span class="help-block error" ng-show="CbsBagBirimForm.tapuBagimsizBolumNo.$error.maxlength">En fazla 10 karekter girebilirsiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBagBirimForm.kullanimTuru.$invalid}">
+        <label for="kullanimTuru" class="col-sm-2 control-label">Kullanım Türü</label>
+        <div id="kullanimTuruControls" class="col-sm-10">
+        <select required id="kullanimTuru" name="kullanimTuru" class="form-control" ng-model="cbsBagBirim.kullanimTuru" ng-options="k for k in kullanimTuruList"  >
+            <option value="">Kullanım Türü Seçiniz.</option>
+        </select>
+        </div>
+    </div>
+    
+    <div class="form-group" ng-class="{'has-error': CbsBagBirimForm.kapiTuru.$invalid}">
+        <label for="kapiTuru" class="col-sm-2 control-label">Kapı Türü</label>
+        <div id="kapiTuruControls" class="col-sm-10">
+            <select required id="kapiTuru" name="kapiTuru" class="form-control" ng-model="cbsBagBirim.kapiTuru" ng-options="k as k for k in kapiTuruList">
+                <option value="">Kapı Türü Seçiniz.</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveCbsBagBirim" name="saveCbsBagBirim" class="btn btn-primary" ng-disabled="isClean() || CbsBagBirimForm.$invalid" ng-click="cbsBagBirim.id != null ? update() : save();"><span class="glyphicon glyphicon-ok-sign"></span> Kaydet</button>
+            <button id="newCbsBagBirim" name="newCbsBagBirim" class="btn btn-primary" ng-disabled="!cbsBagBirim.id" ng-click="newKayit()"><span class="glyphicon glyphicon-ok-sign"></span> Yeni</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Vazgeç</button>
+        </div>
+    </div>
+    
+   </form>
+    
+<div id="search-results" style="font-size: 85%;">
+        <div class="table-responsive">
+        
+        <table class="table table-responsive table-bordered table-striped clearfix">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Katı</th>
+                    <th>İç Kapı No</th>
+                    <th>Tapu Bağımsız Bölüm No</th>
+                    <th>Kullanım Türü</th>
+                    <th>Kapı Türü</th>
+                    <th>Düzenle</th>
+                    <th>Sil</th>
+                </tr>
+            </thead>
+            <tbody id="search-results-body">
+                <tr ng-repeat="result in searchResults">
+                    <td><a>{{result.id}}</a></td>
+                    <td><a>{{result.katNo}}</a></td>
+                    <td><a>{{result.icKapiNo}}</a></td>
+                    <td><a>{{result.tapuBagimsizBolumNo}}</a></td>
+                    <td><a>{{result.kullanimTuru}}</a></td>
+                    <td><a>{{result.kapiTuru}}</a></td>
+                    <td><input type="image" src="img/pencil.png" ng-click="get(result.id)"></a></td>
+                    <td><input type="image" src="img/basket.png" ng-click="remove(result.id)"></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

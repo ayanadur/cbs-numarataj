@@ -1,0 +1,52 @@
+<header ng-switch on="$location.path().indexOf('/CbsIls/new') > -1">
+    <h3 ng-switch-when="true">(Yeni)</h3>
+    <h3 ng-switch-when="false">(Değiştir)</h3>
+</header>
+
+<form id="CbsIlForm" name="CbsIlForm" class="form-horizontal" role="form">
+
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Bir hata oluştu lütfen tekrar deneyiniz.
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsIlForm.cbsUlke.$invalid}">
+        <label for="cbsUlke" class="col-sm-2 control-label">Ülke Adı</label>
+        <div id="cbsUlkeControls" class="col-sm-10">
+        <select id="cbsUlke" name="cbsUlke" class="form-control" ng-model="cbsUlkeSelection" ng-options="c.text for c in cbsUlkeSelectionList"  >
+            <option value="">Ülke seçiniz.</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsIlForm.adi.$invalid}">
+        <label for="adi" class="col-sm-2 control-label">İl Adı</label>
+        <div id="adiControls" class="col-sm-10">
+            <input id="adi" name="adi" type="text" ng-maxlength="50" class="form-control" ng-model="cbsIl.adi" placeholder="İl adı giriniz."></input>
+            <span class="help-block error" ng-show="CbsIlForm.adi.$error.maxlength">50 karekter'i geçemez!</span>
+        </div>
+    </div>
+            
+    <div class="form-group" ng-class="{'has-error': CbsIlForm.stNo.$invalid}">
+        <label for="stNo" class="col-sm-2 control-label">Tuik No</label>
+        <div id="stNoControls" class="col-sm-10">
+            <input id="stNo" name="stNo" type="number" class="form-control" ng-model="cbsIl.stNo" placeholder="Tuik no giriniz."></input>
+            <span class="help-block error" ng-show="CbsIlForm.stNo.$error.number">Sayı girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsIlForm.uavtNo.$invalid}">
+        <label for="uavtNo" class="col-sm-2 control-label">Uavt No</label>
+        <div id="uavtNoControls" class="col-sm-10">
+            <input id="uavtNo" name="uavtNo" type="number" class="form-control" ng-model="cbsIl.uavtNo" placeholder="Uavt no giriniz."></input>
+            <span class="help-block error" ng-show="CbsIlForm.uavtNo.$error.number">Sayı girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveCbsIl" name="saveCbsIl" class="btn btn-primary" ng-disabled="isClean() || CbsIlForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Kaydet</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Vazgeç</button>
+            <button id="deleteCbsIl" name="deleteCbsIl" class="btn btn-danger" ng-show="cbsIl.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Sil</button>
+        </div>
+    </div>
+</form>

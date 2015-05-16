@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css" />
+	<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div data-role="header" id="header-1">
+		<a href="#" class="ui-btn ui-mini ui-btn-inline ui-btn-left ui-corner-all ui-icon-delete ui-btn-icon-left">Cancel</a>
+		<h1>Edit Contact</h1>
+		<a href="#" class="ui-btn ui-mini ui-btn-inline ui-btn-right ui-corner-all ui-icon-check ui-btn-icon-left">Save</a>
+	</div>
+	
+	<div class="ui-body-a ui-body">
+		<div data-role="navbar" id="navbar-1" data-iconpos="left">
+			<ul>
+				<li><a href="#" data-icon="action">A</a></li>
+				<li><a href="#">B</a></li>
+				<li><a href="#">C</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="ui-field-contain">
+		<label for="text-1">Input:</label>
+		<input name="text-1" id="text-1" data-clear-btn="true" data-mini="true" value="" placeholder="KLNLK" pattern="12" autofocus="true" required="true" type="text"/>
+	</div>
+	
+	<label><input type="checkbox" name="checkbox-1" id="checkbox-1" data-theme="b"/>I agree</label>
+	
+	<div class="ui-field-contain">
+		<label for="select-1" class="ui-hidden-accessible">Select:</label>
+		<select name="select-1" id="select-1" data-mini="true" data-iconpos="right" data-theme="a">
+			<option value="A">A</option>
+			<option value="B">B</option>
+			<option value="C">C</option>
+		</select>
+	</div>
+	
+	<ul data-role="listview" id="listview-1" data-autodividers="true" data-inset="true">
+		<li><a href="item1.html">Item 1</a></li>
+		<li><a href="item2.html">Item 2</a></li>
+		<li><a href="item3.html">Item 3</a></li>
+	</ul>
+	
+	<a href="" id="button-1" data-rel="dialog" class="ui-btn ui-icon-alert ui-btn-icon-left ui-corner-all">Link button</a>
+	
+	<div data-role="footer" id="footer-1" class="ui-bar">
+		<h6>Footer</h6>
+		<a href="#" class="ui-btn ui-mini ui-corner-all ui-icon-plus ui-btn-icon-left">Add</a>
+		<a href="#" class="ui-btn ui-mini ui-corner-all ui-icon-arrow-u ui-btn-icon-left">Up</a>
+		<a href="#" class="ui-btn ui-mini ui-corner-all ui-icon-arrow-d ui-btn-icon-left">Down</a>
+	</div>
+	
+</body>
+</html>

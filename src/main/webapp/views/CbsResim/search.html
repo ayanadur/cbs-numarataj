@@ -1,0 +1,116 @@
+
+   <form id="CbsResimForm" name="CbsResimForm" class="form-horizontal" role="form" novalidate >
+    
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Bir hata oluştu lütfen tekrar deneyiniz.
+    </div>
+        
+    <div class="form-group">
+        <label for="bina_id" class="col-sm-2 control-label">Bağlı Bina</label>
+        <div class="col-sm-10">
+        	<span class="form-control"><strong> Id : </strong>{{cbsResim.cbsBina.id}} <strong> Bina Adı : </strong> {{cbsResim.cbsBina.binaAdi}} <strong> Kapı No : </strong> {{cbsResim.cbsBina.kapiNo}}</span>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="id" class="col-sm-2 control-label">Id</label>
+        <div class="col-sm-10">
+            <span class="form-control">{{cbsResim.id}}</span>
+        </div>
+    </div>
+    
+    <div class="form-group" ng-show="!cbsResim.id">
+        <label for="filename" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+         <input id="filename" name="filename" type="file" accept="image/*"
+                ng-model="filename"
+                onchange="angular.element(this).scope().onFileSelect(this)"
+                class="btn btn-success fileinput-button" required></input>
+        </div>
+        </div>
+    </div>
+
+    <div class="form-group" ng-show="!cbsResim.id">
+    	<label for class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+        	<img id="thumbResimId" name="thumbResimId" class="img-thumbnail" src/>
+        </div>
+    </div>
+        
+    <div class="form-group" ng-show="cbsResim.id">
+        <label for class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+        	<img id="resimId" name="resimId" class="img-thumbnail col-md4" ng-src="{{getFilePath()}}" /> 
+        </div>
+    </div>
+    
+    <div class="form-group">
+    	<label for="dosyaAdi" class="col-sm-2 control-label">Dosya Adı</label>
+        <div class="col-sm-10">
+         <input id="dosyaAdi" name="dosyaAdi" type="hidden" ng-model="cbsResim.dosyaAdi"></input>
+         <span class="form-control">{{cbsResim.dosyaAdi}}</span>
+        </div>
+    </div> 
+    
+    <div class="form-group">
+    	<label for="turu" class="col-sm-2 control-label">Türü</label>
+        <div class="col-sm-10">
+         <span class="form-control">{{cbsResim.turu}}</span>
+         <input id="turu" name="turu" type="hidden" ng-model="cbsResim.turu"></input>
+        </div>
+    </div>
+       
+    <div class="form-group">
+    	<label for="path" class="col-sm-2 control-label"></label>
+        <div class="col-sm-10">
+         <input id="path" name="path" type="hidden" ng-model="cbsResim.path"></input>
+        </div>
+    </div>
+           	      
+    <div class="form-group" ng-class="{'has-error': CbsResimForm.kayitTarihi.$invalid}">
+        <label for="date" class="col-sm-2 control-label">Kayıt Tarihi</label>
+        <div id="kayitTarihiControls" class="col-sm-10">
+            <datetime id="kayitTarihi" name="kayitTarihi" required ng-model="cbsResim.kayitTarihi" placeholder="Kayıt Tarihi"></datetime>
+            <span class="help-block error" ng-show="PerformanceForm.kayitTarihi.$error.required">Zorunlu alan.</span> 
+            <span class="help-block error" ng-show="PerformanceForm.kayitTarihi.$error.datetimeFormat">Hatalı tarih formatı.</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="savecbsResim" name="savecbsResim" class="btn btn-primary" ng-disabled="CbsResimForm.$invalid || cbsResim.id" ng-click="cbsResim.id != null ? update() : saveFile();"><span class="glyphicon glyphicon-ok-sign"></span> Kaydet</button>
+            <button id="newcbsResim" name="newcbsResim" class="btn btn-primary" ng-disabled="!cbsResim.id" ng-click="newKayit()"><span class="glyphicon glyphicon-ok-sign"></span> Yeni</button>
+            <button id="deleteCbsResim" name="deleteCbsResim" class="btn btn-danger" ng-show="cbsResim.id" ng-click="remove(cbsResim.id)"><span class="glyphicon glyphicon-trash"></span> Sil</button>
+        </div>
+    </div>
+       
+   </form>
+
+<div id="search-results" style="font-size: 85%;">
+        <div class="table-responsive">
+        
+        <table class="table table-responsive table-bordered table-striped clearfix">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Dosya Adı</th>
+                    <th>Türü</th>
+                    <th>Düzenle</th>
+                    <th>Sil</th>
+                </tr>
+            </thead>
+            <tbody id="search-results-body">
+                <tr ng-repeat="result in searchResults">
+                
+                	<td><a href ng-click="get(result.id)"><span>{{result.id}}</span></a></td>
+                	<td><a href ng-click="get(result.id)"><span>{{result.dosyaAdi}}</span></a></td>
+                	<td><a href ng-click="get(result.id)"><span>{{result.turu}}</span></a></td>
+                	
+                	<td><a href ng-click="get(result.id)"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                	<td><a href ng-click="remove(result.id)"><span class="glyphicon glyphicon-trash"></span></a></td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

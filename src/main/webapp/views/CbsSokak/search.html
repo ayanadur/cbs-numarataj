@@ -1,0 +1,117 @@
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-sm-2">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/CbsSokaks/new"><span class="glyphicon glyphicon-plus-sign"></span> Yeni Kayıt</a>
+        </div>
+    </div>
+</div>
+<hr/>
+
+<div style="font-size: 85%;">
+
+    <form id="CbsSokakSearch" name="CbsSokakSearch" class="form-horizontal" role="form">
+
+    <div class="form-group" ng-class="{'has-error': CbsSokakSearch.cbsIlce.$invalid}">
+        <label for="cbsIlce" class="col-sm-2 control-label">İlçe Adı</label>
+        <div id="cbsIlceControls" class="col-sm-10">
+        <select id="cbsIlce" name="cbsIlce" required class="form-control" ng-model="cbsIlceSelection"  ng-options="c as c.adi for c in cbsIlceList">
+            <option value="">İlçe Seçiniz.</option>
+        </select>
+        </div>
+    </div>        
+       
+    <div class="form-group" ng-class="{'has-error': CbsSokakSearch.cbsMahalle.$invalid}">
+        <label for="cbsMahalle" class="col-sm-2 control-label">Mahalle Adı</label>
+        <div id="cbsMahalleControls" class="col-sm-10">
+        <select id="cbsMahalle" name="cbsMahalle" required class="form-control" ng-model="cbsMahalleSelection" ng-options="c as c.adi for c in cbsMahalleList"  >
+            <option value="">Mahalle Seçiniz.</option>
+        </select>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="adi" class="col-sm-2 control-label">Sokak Adı</label>
+        <div class="col-sm-10">
+            <input id="adi" name="adi" class="form-control" type="text" ng-model="search.adi" placeholder="Sokak adı giriniz."></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="turu" class="col-sm-2 control-label">Sokak Türü</label>
+        <div class="col-sm-10">
+            <select id="turu" name="turu" class="form-control" ng-model="search.turu" ng-options="t as t for t in turuList">
+                <option value="">Sokak Türü Seçiniz.</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="kaplamaTuru" class="col-sm-2 control-label">Kaplama Türü</label>
+        <div class="col-sm-10">
+            <select id="kaplamaTuru" name="kaplamaTuru" class="form-control" ng-model="search.kaplamaTuru" ng-options="k as k for k in kaplamaTuruList">
+                <option value="">Kaplama türü seçiniz.</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="stNo" class="col-sm-2 control-label">St.No</label>
+        <div class="col-sm-10">
+            <input id="stNo" name="stNo" class="form-control" type="text" ng-model="search.stNo" placeholder="Tuik no giriniz."></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="uavtNo" class="col-sm-2 control-label">Uavt No</label>
+        <div class="col-sm-10">
+            <input id="uavtNo" name="uavtNo" class="form-control" type="text" ng-model="search.uavtNo" placeholder="Uavt no giriniz."></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-sm-10">
+            <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><span class="glyphicon glyphicon-search"></span> Ara</a>
+        </div>
+    </div>
+        
+    </form>
+</div>
+<div id="search-results" style="font-size: 75%;">
+	<div class="table-responsive">
+        <table class="table table-responsive table-bordered table-striped clearfix">
+            <thead>
+                <tr>
+                    <th style="width: 10px"></th>
+                	<th style="width: 70px">Mahalle</th>
+                    <th style="width: 70px">Adi</th>
+                    <th style="width: 40px">Türü</th>
+                    <th style="width: 40px">Kaplama</th>
+                    <th style="width: 40px">Uavt No</th>
+                </tr>
+            </thead>
+            <tbody id="search-results-body">
+                <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                    <td><a href="#/CbsSokaks/edit/{{result.id}}"><img src="img/pencil.png" border="0"></a></td>
+                    <td>{{result.cbsMahalle.adi}}</td>                    
+                    <td>{{result.adi}}</td>
+                    <td>{{result.turu}}</td>
+                    <td>{{result.kaplamaTuru}}</td>
+                    <td>{{result.uavtNo}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        
+    <ul class="pagination pagination-centered">
+        <li ng-class="{disabled:currentPage == 0}">
+            <a id="prev" href ng-click="previous()">«</a>
+        </li>
+        <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+            <a href ng-bind="n + 1">1</a>
+        </li>
+        <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+            <a id="next" href ng-click="next()">»</a>
+        </li>
+    </ul>
+
+</div>

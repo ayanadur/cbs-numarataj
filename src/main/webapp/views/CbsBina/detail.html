@@ -1,0 +1,260 @@
+<header ng-switch on="$location.path().indexOf('/CbsBinas/new') > -1">
+    <h3 ng-switch-when="true">Yeni Kayıt</h3>
+    <h3 ng-switch-when="false">Değiştir</h3>
+</header>
+
+<form id="CbsBinaForm" name="CbsBinaForm" class="form-horizontal" role="form" novalidate>
+
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Bir hata oluştu lütfen tekrar deneyiniz.
+    </div>
+    
+    <div class="form-group">
+        <label for="binaId" class="col-sm-2 control-label">Bina ID</label>
+        <div id="binaIdControls" class="col-sm-10">
+            <input id="binaId" name="binaId" type="number" disabled="true" class="form-control" ng-model="cbsBina.id" placeholder="Yeni Kayıt"></input>
+        </div>
+    </div>
+    
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.cbsIlce.$invalid}">
+        <label for="cbsIlce" class="col-sm-2 control-label">İlçe Adı</label>
+        <div  id="cbsIlceControls" class="col-sm-10">
+	        <select id="cbsIlce" name="cbsIlce" required class="form-control" ng-model="cbsIlceSelection" ng-options="c.text for c in cbsIlceSelectionList"  >
+	            <option value="">İlçe Seçiniz.</option>
+	        </select>
+	        <span class="help-block error" ng-show="CbsBinaForm.cbsIlce.$error.selected">İlçe Seçiniz!</span>
+        </div>
+    </div>
+    
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.cbsMahalle.$invalid}">
+        <label for="cbsMahalle" class="col-sm-2 control-label">Mahalle Adı</label>
+        <div id="cbsMahalleControls" class="col-sm-10">
+        <select id="cbsMahalle" name="cbsMahalle" required class="form-control" ng-model="cbsMahalleSelection" ng-options="c.text for c in cbsMahalleSelectionList"  >
+            <option value="">Mahalle Seçiniz.</option>
+        </select>
+        </div>      
+    </div>
+        
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.cbsSokak.$invalid}">
+        <label for="cbsSokak" class="col-sm-2 control-label">Sokak Adı</label>
+        <div id="cbsSokakControls" class="col-sm-10">
+        <select id="cbsSokak" name="cbsSokak" required class="form-control" ng-model="cbsSokakSelection"  ng-options="c.text for c in cbsSokakSelectionList"  >
+            <option value="">Sokak Seçiniz.</option>
+        </select>
+        </div>        
+    </div>
+    
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.binaAdi.$invalid}">
+        <label for="binaAdi" class="col-sm-2 control-label">Bina Adı</label>
+        <div id="binaAdiControls" class="col-sm-10">
+            <input id="binaAdi" name="binaAdi" type="text" ng-maxlength="50" class="form-control" ng-model="cbsBina.binaAdi" placeholder="Bina adı giriniz." autofocus></input>
+            <span class="help-block error" ng-show="CbsBinaForm.binaAdi.$error.maxlength">Max 50 karekter olmalı!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.siteAdi.$invalid}">
+        <label for="siteAdi" class="col-sm-2 control-label">Site Adı</label>
+        <div id="siteAdiControls" class="col-sm-10">
+            <input id="siteAdi" name="siteAdi" type="text" class="form-control" ng-maxlength="50" ng-model="cbsBina.siteAdi" placeholder="Site adı giriniz."></input>
+            <span class="help-block error" ng-show="CbsBinaForm.siteAdi.$error.maxlength">Max 50 karekter olmalı!</span>
+        </div>
+    </div>
+    
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.blokAdi.$invalid}">
+        <label for="blokAdi" class="col-sm-2 control-label">Blok Adı</label>
+        <div id="blokAdiControls" class="col-sm-10">
+            <input id="blokAdi" name="blokAdi" type="text" class="form-control" ng-maxlength="50" ng-model="cbsBina.blokAdi" placeholder="Blok adı giriniz."></input>
+            <span class="help-block error" ng-show="CbsBinaForm.blokAdi.$error.maxlength">Max 50 karekter olmalı!</span>
+        </div>
+    </div>
+    
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.uavtNo.$invalid}">
+        <label for="uavtNo" class="col-sm-2 control-label">Uavt No</label>
+        <div id="uavtNoControls" class="col-sm-10">
+            <input id="uavtNo" name="uavtNo" type="number" class="form-control" ng-model="cbsBina.uavtNo" placeholder="Uavt no giriniz."></input>
+            <span class="help-block error" ng-show="CbsBinaForm.uavtNo.$error.number">Sayı girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.kapiTuru.$invalid}">
+        <label for="kapiTuru" class="col-sm-2 control-label">Dış Kapı Türü</label>
+        <div id="kapiTuruControls" class="col-sm-10">
+        <select id="kapiTuru" name="kapiTuru" required class="form-control" ng-model="cbsBina.kapiTuru" ng-options="k for k in kapiTuruList"  >
+            <option value="">Kapı türü seçiniz.</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.kapiNo.$invalid}">
+        <label for="kapiNo" class="col-sm-2 control-label">Kapı No</label>
+        <div id="kapiNoControls" class="col-sm-10">
+            <input id="kapiNo" name="kapiNo" required type="text" ng-maxlength="10" class="form-control" ng-model="cbsBina.kapiNo" placeholder="Kapı no giriniz."></input>
+            <span class="help-block error" ng-show="CbsBinaForm.kapiNo.$error.maxlength">Max 10 Karekter girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.kapiNoDiger.$invalid}">
+        <label for="kapiNoDiger" class="col-sm-2 control-label">Kapı No Diğer</label>
+        <div id="kapiNoDigerControls" class="col-sm-10">
+            <input id="kapiNoDiger" name="kapiNoDiger" type="text" ng-maxlength="10" class="form-control" ng-model="cbsBina.kapiNoDiger" placeholder="Diğer kapı no giriniz."></input>
+            <span class="help-block error" ng-show="CbsBinaForm.kapiNoDiger.$error.maxlength">Max 10 Karekter girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.formNo.$invalid}">
+        <label for="formNo" class="col-sm-2 control-label">Bina Form No</label>
+        <div id="formNoControls" class="col-sm-10">
+            <input id="formNo" name="formNo" type="number" class="form-control" ng-model="cbsBina.formNo" placeholder="Bina form no giriniz."></input>
+            <span class="help-block error" ng-show="CbsBinaForm.formNo.$error.number">Sayı girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.zeminKullanimTuru.$invalid}">
+        <label for="zeminKullanimTuru" class="col-sm-2 control-label">Zemin Kullanım Türü</label>
+        <div id="zeminKullanimTuruControls" class="col-sm-10">
+        <select id="zeminKullanimTuru" name="zeminKullanimTuru" required class="form-control" ng-model="cbsBina.zeminKullanimTuru" ng-options="z for z in zeminKullanimTuruList"  >
+            <option value="">Zemin kullanım türü seçiniz.</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.yapiTipi.$invalid}">
+        <label for="yapiTipi" class="col-sm-2 control-label">Yapı Tipi</label>
+        <div id="yapiTipiControls" class="col-sm-10">
+        <select id="yapiTipi" name="yapiTipi" class="form-control" required ng-model="cbsBina.yapiTipi" ng-options="y for y in yapiTipiList"  >
+            <option value="">Yapı tipi seçiniz.</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.yapiDurumu.$invalid}">
+        <label for="yapiDurumu" class="col-sm-2 control-label">Yapı Durumu</label>
+        <div id="yapiDurumuControls" class="col-sm-10">
+        <select id="yapiDurumu" name="yapiDurumu" required class="form-control" ng-model="cbsBina.yapiDurumu" ng-options="y for y in yapiDurumuList"  >
+            <option value="">Yapı durumu seçiniz.</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.yapiFizikiDurumu.$invalid}">
+        <label for="yapiFizikiDurumu" class="col-sm-2 control-label">Yapı Fiziki Durumu</label>
+        <div id="yapiFizikiDurumuControls" class="col-sm-10">
+        <select id="yapiFizikiDurumu" name="yapiFizikiDurumu" required class="form-control" ng-model="cbsBina.yapiFizikiDurumu" ng-options="y for y in yapiFizikiDurumuList"  >
+            <option value="">Yapı fiziki durumu giriniz.</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.katSayisi.$invalid}">
+        <label for="katAdedi" class="col-sm-2 control-label">Kat Adeti</label>
+        <div id="katAdediControls" class="col-sm-10">
+            <input id="katSayisi" name="katSayisi" required type="number" class="form-control" ng-model="cbsBina.katSayisi" placeholder="Kat adeti giriniz."></input>
+            <span class="help-block error" ng-show="CbsBinaForm.katSayisi.$error.number">Sayı girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.yolAltiKatSayisi.$invalid}">
+        <label for="yolAltiKatSayisi" class="col-sm-2 control-label">Yol Altı Kat Sayısı</label>
+        <div id="yolAltiKatSayisiControls" class="col-sm-10">
+            <input id="yolAltiKatSayisi" name="yolAltiKatSayisi" type="number" class="form-control" ng-model="cbsBina.yolAltiKatSayisi" placeholder="Yol altı kat sayısı giriniz."></input>
+            <span class="help-block error" ng-show="CbsBinaForm.yolAltiKatSayisi.$error.number">Sayı girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.yolUstuKatSayisi.$invalid}">
+        <label for="yolUstuKatSayisi" class="col-sm-2 control-label">Yol üstü Kat Sayısı</label>
+        <div id="yolUstuKatSayisiControls" class="col-sm-10">
+            <input id="yolUstuKatSayisi" name="yolUstuKatSayisi" type="number" class="form-control" ng-model="cbsBina.yolUstuKatSayisi" placeholder="Yol üstü kat sayısı giriniz."></input>
+            <span class="help-block error" ng-show="CbsBinaForm.yolUstuKatSayisi.$error.number">Sayı girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.bagimsizBolumSayisi.$invalid}">
+        <label for="bagimsizBolumSayisi" class="col-sm-2 control-label">Bağımsız Bölüm Sayısı</label>
+        <div id="bagimsizBolumSayisiControls" class="col-sm-10">
+            <input id="bagimsizBolumSayisi" name="bagimsizBolumSayisi" required type="number" class="form-control" ng-model="cbsBina.bagimsizBolumSayisi" placeholder="Bağımsız bölüm adeti giriniz."></input>
+            <span class="help-block error" ng-show="CbsBinaForm.bagimsizBolumSayisi.$error.number">Sayı girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.catiDurumu.$invalid}">
+        <label for="catiDurumu" class="col-sm-2 control-label">Çatı Durumu</label>
+        <div id="catiDurumuControls" class="col-sm-10">
+        <select id="catiDurumu" name="catiDurumu" required class="form-control" ng-model="cbsBina.catiDurumu" ng-options="c for c in catiDurumuList"  >
+            <option value="">Çatı durumu seçiniz.</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.cepheMalzemesi.$invalid}">
+        <label for="cepheMalzemesi" class="col-sm-2 control-label">Cephe Malzemesi</label>
+        <div id="cepheMalzemesiControls" class="col-sm-10">
+        <select id="cepheMalzemesi" name="cepheMalzemesi" required class="form-control" ng-model="cbsBina.cepheMalzemesi" ng-options="c for c in cepheMalzemesiList"  >
+            <option value="">Cephe malzeme türü seçiniz.</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.otoparkTuru.$invalid}">
+        <label for="otoparkTuru" class="col-sm-2 control-label">Otopark Türü</label>
+        <div id="otoparkTuruControls" class="col-sm-10">
+        <select id="otoparkTuru" name="otoparkTuru" required class="form-control" ng-model="cbsBina.otoparkTuru" ng-options="o for o in otoparkTuruList"  >
+            <option value="">Otopark türü seçiniz.</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.asansor.$invalid}">
+        <label for="asansor" class="col-sm-2 control-label">Asansör</label>
+        <div id="asansorControls" class="col-sm-10">
+        <select id="asansor" name="asansor" required class="form-control" ng-model="cbsBina.asansor" ng-options="a for a in asansorList"  >
+            <option value="">Asansör varmı?</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.asansorSayisi.$invalid}">
+        <label for="asansorSayisi" class="col-sm-2 control-label">Asansor Sayısı</label>
+        <div id="asansorSayisiControls" class="col-sm-10">
+            <input id="asansorSayisi" name="asansorSayisi" type="number" class="form-control" ng-model="cbsBina.asansorSayisi" placeholder="Asansör adeti giriniz."></input>
+            <span class="help-block error" ng-show="CbsBinaForm.asansorSayisi.$error.number">Sayı girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.yanginMerdiveni.$invalid}">
+        <label for="yanginMerdiveni" class="col-sm-2 control-label">Yangın Merdiveni</label>
+        <div id="yanginMerdiveniControls" class="col-sm-10">
+        <select id="yanginMerdiveni" name="yanginMerdiveni" required class="form-control" ng-model="cbsBina.yanginMerdiveni" ng-options="y for y in yanginMerdiveniList"  >
+            <option value="">Yangın merdiveni seçiniz.</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.siginak.$invalid}">
+        <label for="siginak" class="col-sm-2 control-label">Sığınak</label>
+        <div id="siginakControls" class="col-sm-10">
+        <select id="siginak" name="siginak" required class="form-control" ng-model="cbsBina.siginak" ng-options="s for s in siginakList"  >
+            <option value="">Sığınak seçiniz.</option>
+        </select>
+        </div>
+    </div>
+            
+    <div class="form-group" ng-class="{'has-error': CbsBinaForm.aciklama.$invalid}">
+        <label for="aciklama" class="col-sm-2 control-label">Açıklama</label>
+        <div id="aciklamaControls" class="col-sm-10">
+            <input id="aciklama" name="aciklama" type="text" class="form-control" ng-maxlength="250" ng-model="cbsBina.aciklama" placeholder="Varsa açıklama giriniz."></input>
+            <span class="help-block error" ng-show="CbsBinaForm.aciklama.$error.maxlength">Max 250 karekter olmalı!</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveCbsBina" name="saveCbsBina" class="btn btn-primary" ng-disabled="isClean() || CbsBinaForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Kaydet</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Vazgeç</button>
+            <button id="deleteCbsBina" name="deleteCbsBina" class="btn btn-danger" ng-show="cbsBina.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Sil</button>
+            <button id="detayCbsBina" name="detayCbsBina" class="btn btn-info" ng-show="cbsBina.id" ng-click="goCbsBagBirims(cbsBina.id)"><span class="glyphicon glyphicon-edit"></span> B.Birim</button>
+            <button id="detayCbsBinaResim" name="detayCbsBina" class="btn btn-info" ng-show="cbsBina.id" ng-click="goCbsResims(cbsBina.id)"><span class="glyphicon glyphicon-picture"></span> Resim</button>
+        </div>
+    </div>
+       
+</form>

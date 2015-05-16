@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Cbs Numarataj İşlemleri</title>
+	<link href="img/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+    <link href="styles/bootstrap.css" rel="stylesheet" media="screen">
+    <link href="styles/bootstrap-theme.css" rel="stylesheet" media="screen">
+     <!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link href="styles/new/bootstrap-cosmo.min.css" rel="stylesheet" media="screen"> -->
+    <link href="styles/main.css" rel="stylesheet" media="screen">
+    <link href="scripts/vendor/loading-bar.css" rel="stylesheet" media="screen">
+</head>
+<body>
+    <div id="wrap">
+    	<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="offcanvas">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                	<a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home"></span> Cbs Numarataj İşlemleri </a>
+			    </div>
+                <div class="navbar-header" style="float:right; top: 10px; right: 20px;">
+                    <span class="navbar-brand">{{globals.currentUser.givenname}} {{globals.currentUser.sn}}</span>
+                	<a class="navbar-brand" href="#/login"><span class="glyphicon glyphicon-log-out"></span> Çıkış</a>
+			    </div>			    
+			</div>
+    	</div>
+        <div class="container">
+            <div class="row row-offcanvas row-offcanvas-left">
+                <!-- sidebar -->
+                <div class="col-xs-6 col-sm-3 well sidebar-offcanvas">
+                    <a href="app.html">
+                        <img class="hidden-xs img-responsive" src="img/logo.png" alt="Muğla Büyükşehir Belediyesi"/>
+                    </a>
+                    <nav class="sidebar-nav" ng-controller="NavController" role="navigation">
+                        <div id="sidebar-entries" class="list-group">
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('CbsUlkes')}" href="#/CbsUlkes" data-toggle="offcanvas">Ülke</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('CbsIls')}" href="#/CbsIls" data-toggle="offcanvas">İl</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('CbsIlces')}" href="#/CbsIlces" data-toggle="offcanvas">İlçe</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('CbsMahalles')}" href="#/CbsMahalles" data-toggle="offcanvas">Mahalle</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('CbsSokaks')}" href="#/CbsSokaks" data-toggle="offcanvas">Sokak</a>
+                        	<a class="list-group-item" ng-class="{active: matchesRoute('CbsBinas')}" href="#/CbsBinas" data-toggle="offcanvas">Numarataj İşlemleri</a>
+                        </div>
+                    </nav>
+                </div>
+                <!-- main area-->
+                <div class="col-sm-offset-1 col-xs-12 col-sm-8 well mainarea">
+                    <div id="main" ng-view>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div id="footer">
+        <div class="container">
+            <!-- <p>Powered by <a href="http://www.uni-yaz.com">Universal</a></p> -->
+            <p>Copyright 2015 © Universal Yazılım</p>
+            
+        </div>
+    </div>
+    
+    <script src="scripts/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="scripts/vendor/jquery-2.0.3.js"></script>
+    <script src="scripts/vendor/bootstrap.js"></script>
+    
+    <script src="scripts/vendor/angular.min.js"></script>
+    <script src="scripts/vendor/angular-route.min.js"></script>
+    <script src="scripts/vendor/angular-resource.min.js"></script>
+    <script src="scripts/vendor/angular-cookies.min.js"></script>
+    <script src="scripts/vendor/moment.min.js"></script>
+    <script src="scripts/vendor/loading-bar.js"></script>
+    
+    <script src="scripts/app.js"></script>
+    <script src="scripts/offcanvas.js"></script>
+    
+    <script src="scripts/directives/datepicker.js"></script>
+    <script src="scripts/directives/timepicker.js"></script>
+    <script src="scripts/directives/datetimepicker.js"></script>
+    
+    <script src="scripts/filters/startFromFilter.js"></script>
+    <script src="scripts/filters/genericSearchFilter.js"></script>
+    
+    <script src="scripts/services/locationParser.js"></script>
+    
+    <script src="scripts/services/CbsBinaFactory.js"></script>
+    <script src="scripts/controllers/newCbsBinaController.js"></script>
+    <script src="scripts/controllers/searchCbsBinaController.js"></script>
+    <script src="scripts/controllers/editCbsBinaController.js"></script>
+    
+    <script src="scripts/services/CbsIlFactory.js"></script>
+    <script src="scripts/controllers/newCbsIlController.js"></script>
+    <script src="scripts/controllers/searchCbsIlController.js"></script>
+    <script src="scripts/controllers/editCbsIlController.js"></script>
+    
+    <script src="scripts/services/CbsIlceFactory.js"></script>
+    <script src="scripts/controllers/newCbsIlceController.js"></script>
+    <script src="scripts/controllers/searchCbsIlceController.js"></script>
+    <script src="scripts/controllers/editCbsIlceController.js"></script>
+    
+    <script src="scripts/services/CbsMahalleFactory.js"></script>
+    <script src="scripts/controllers/newCbsMahalleController.js"></script>
+    <script src="scripts/controllers/searchCbsMahalleController.js"></script>
+    <script src="scripts/controllers/editCbsMahalleController.js"></script>
+    
+    <script src="scripts/services/CbsSokakFactory.js"></script>
+    <script src="scripts/controllers/newCbsSokakController.js"></script>
+    <script src="scripts/controllers/searchCbsSokakController.js"></script>
+    <script src="scripts/controllers/editCbsSokakController.js"></script>
+    
+    <script src="scripts/services/CbsUlkeFactory.js"></script>
+    <script src="scripts/controllers/newCbsUlkeController.js"></script>
+    <script src="scripts/controllers/searchCbsUlkeController.js"></script>
+    <script src="scripts/controllers/editCbsUlkeController.js"></script>
+    
+    <script src="scripts/services/CbsBagBirimFactory.js"></script>
+    <script src="scripts/controllers/newCbsBagBirimController.js"></script>
+    <script src="scripts/controllers/searchCbsBagBirimController.js"></script>
+    <script src="scripts/controllers/editCbsBagBirimController.js"></script>
+    
+    <script src="scripts/services/CbsResimFactory.js"></script>
+    <script src="scripts/controllers/searchCbsResimController.js"></script>
+    
+
+    <script src="scripts/services/authentication.service.js"></script>
+	<!-- Real user service that uses an api -->
+    <script src="scripts/services/user.service.js"></script>
+ 
+    <!-- Fake user service for demo that uses local storage -->
+    <!-- <script src="scripts/services/user.service.local-storage.js"></script> -->
+        
+    <script src="scripts/services/flash.service.js"></script>
+    <script src="scripts/services/login.service.js"></script>
+    
+</body>
+</html>

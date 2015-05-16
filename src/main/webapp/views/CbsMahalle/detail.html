@@ -1,0 +1,51 @@
+<header ng-switch on="$location.path().indexOf('/CbsMahalles/new') > -1">
+    <h3 ng-switch-when="true">(Yeni Kayıt)</h3>
+    <h3 ng-switch-when="false">(Değiştir)</h3>
+</header>
+<form id="CbsMahalleForm" name="CbsMahalleForm" class="form-horizontal" role="form">
+
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Bir hata oluştu lütfen tekrar deneyiniz.
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsMahalleForm.cbsIlce.$invalid}">
+        <label for="cbsIlce" class="col-sm-2 control-label">İlçe Adı</label>
+        <div id="cbsIlceControls" class="col-sm-10">
+        <select id="cbsIlce" name="cbsIlce" class="form-control" ng-model="cbsIlceSelection" ng-options="c.text for c in cbsIlceSelectionList"  >
+            <option value="">İlçe seçiniz.</option>
+        </select>
+        </div>
+    </div>    
+
+    <div class="form-group" ng-class="{'has-error': CbsMahalleForm.adi.$invalid}">
+        <label for="adi" class="col-sm-2 control-label">Mahalle Adı</label>
+        <div id="adiControls" class="col-sm-10">
+            <input id="adi" name="adi" type="text" ng-maxlength="50" class="form-control" ng-model="cbsMahalle.adi" placeholder="Mahalle adı giriniz."></input>
+            <span class="help-block error" ng-show="CbsMahalleForm.adi.$error.maxlength">Max 50 karekter olmalı!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsMahalleForm.stNo.$invalid}">
+        <label for="stNo" class="col-sm-2 control-label">Tuik No</label>
+        <div id="stNoControls" class="col-sm-10">
+            <input id="stNo" name="stNo" type="number" class="form-control" ng-model="cbsMahalle.stNo" placeholder="Tuik no giriniz."></input>
+            <span class="help-block error" ng-show="CbsMahalleForm.stNo.$error.number">Sayı girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsMahalleForm.uavtNo.$invalid}">
+        <label for="uavtNo" class="col-sm-2 control-label">Uavt No</label>
+        <div id="uavtNoControls" class="col-sm-10">
+            <input id="uavtNo" name="uavtNo" type="number" class="form-control" ng-model="cbsMahalle.uavtNo" placeholder="Uavt no giriniz."></input>
+            <span class="help-block error" ng-show="CbsMahalleForm.uavtNo.$error.number">Sayı girmelisiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveCbsMahalle" name="saveCbsMahalle" class="btn btn-primary" ng-disabled="isClean() || CbsMahalleForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Kaydet</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Vazgeç</button>
+            <button id="deleteCbsMahalle" name="deleteCbsMahalle" class="btn btn-danger" ng-show="cbsMahalle.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Sil</button>
+        </div>
+    </div>
+</form>

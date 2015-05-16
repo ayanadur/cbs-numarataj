@@ -1,0 +1,63 @@
+<header ng-switch on="$location.path().indexOf('/CbsBagBirims/new') > -1">
+    <h3 ng-switch-when="true">Yeni</h3>
+    <h3 ng-switch-when="false">Değiştir</h3>
+</header>
+<form id="CbsBagBirimForm" name="CbsBagBirimForm" class="form-horizontal" role="form">
+
+    <div ng-show="displayError" class="alert alert-danger">
+        <strong>Error!</strong> Bir hata oluştu lütfen tekrar deneyiniz.
+    </div>
+    
+
+    <div class="form-group" ng-class="{'has-error': CbsBagBirimForm.icKapiNo.$invalid}">
+        <label for="icKapiNo" class="col-sm-2 control-label">İç Kapı No</label>
+        <div id="icKapiNoControls" class="col-sm-10">
+            <input id="icKapiNo" name="icKapiNo" type="text" ng-maxlength="10" class="form-control" ng-model="cbsBagBirim.icKapiNo" placeholder="Enter the CbsBagBirim Ic Kapi No"></input>
+            <span class="help-block error" ng-show="CbsBagBirimForm.icKapiNo.$error.maxlength">En fazla 10 karekter girebilirsiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBagBirimForm.tapuBagimsizBolumNo.$invalid}">
+        <label for="tapuBagimsizBolumNo" class="col-sm-2 control-label">Tapu Bağımsız Bölüm No</label>
+        <div id="tapuBagimsizBolumNoControls" class="col-sm-10">
+            <input id="tapuBagimsizBolumNo" name="tapuBagimsizBolumNo" type="text" ng-maxlength="10" class="form-control" ng-model="cbsBagBirim.tapuBagimsizBolumNo" placeholder="Enter the CbsBagBirim Tapu Bagimsiz Bolum No"></input>
+            <span class="help-block error" ng-show="CbsBagBirimForm.tapuBagimsizBolumNo.$error.maxlength">En fazla 10 karekter girebilirsiniz!</span>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBagBirimForm.kullanimTuru.$invalid}">
+        <label for="kullanimTuru" class="col-sm-2 control-label">Kullanım Türü</label>
+        <div id="kullanimTuruControls" class="col-sm-10">
+        <select id="kullanimTuru" name="kullanimTuru" class="form-control" ng-model="cbsBagBirim.kullanimTuru" ng-options="k for k in kullanimTuruList"  >
+            <option value="">Kullanım türü seçiniz.</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBagBirimForm.kapiTuru.$invalid}">
+        <label for="kapiTuru" class="col-sm-2 control-label">Kapı Kullanım Türü</label>
+        <div id="kapiTuruControls" class="col-sm-10">
+        <select id="kapiTuru" name="kapiTuru" class="form-control" ng-model="cbsBagBirim.kapiTuru" ng-options="k for k in kapiTuruList"  >
+            <option value="">Kapı Türü Seçiniz.</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': CbsBagBirimForm.cbsBina.$invalid}">
+        <label for="cbsBina" class="col-sm-2 control-label">Cbs Bina</label>
+        <div id="cbsBinaControls" class="col-sm-10">
+        <select id="cbsBina" name="cbsBina" class="form-control" ng-model="cbsBinaSelection" ng-options="c.text for c in cbsBinaSelectionList"  >
+            <option value="">Bağlı Bina No</option>
+        </select>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button id="saveCbsBagBirim" name="saveCbsBagBirim" class="btn btn-primary" ng-disabled="isClean() || CbsBagBirimForm.$invalid" ng-click="save()"><span class="glyphicon glyphicon-ok-sign"></span> Kaydet</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Vazgeç</button>
+            <button id="deleteCbsBagBirim" name="deleteCbsBagBirim" class="btn btn-danger" ng-show="cbsBagBirim.id" ng-click="remove()"><span class="glyphicon glyphicon-trash"></span> Sil</button>
+        </div>
+    </div>
+</form>

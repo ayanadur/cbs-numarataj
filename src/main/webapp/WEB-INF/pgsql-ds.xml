@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema">
+
+<!-- 	<datasource jndi-name="java:jboss/datasources/pgsql" enabled="true" 
+	    use-java-context="true" pool-name="pgsql">
+	 <connection-url>jdbc:postgresql://localhost:5432/dbcbs</connection-url>
+	 <driver>postgresql</driver>
+	 <pool></pool>
+	 <security>
+	  <user-name>cbs</user-name>
+	  <password>cbs</password>
+	 </security>
+	</datasource> -->
+ 
+	<datasource jndi-name="java:jboss/datasources/pgsql" enabled="true" pool-name="pgsql" jta="true" use-java-context="true" use-ccm="true">
+	    <connection-url>jdbc:postgresql://localhost:5432/dbcbs</connection-url>
+	    <driver>org.postgresql</driver>
+	    <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+	    <pool>
+	        <min-pool-size>10</min-pool-size>
+	        <max-pool-size>100</max-pool-size>
+	        <prefill>true</prefill>
+	    </pool>
+	    <security>
+	        <user-name>cbs</user-name>
+	        <password>cbs</password>
+	    </security>
+	    <validation>
+	        <validate-on-match>false</validate-on-match>
+	        <background-validation>false</background-validation>
+	        <background-validation-millis>1</background-validation-millis>
+	    </validation>
+	    <statement>
+	        <prepared-statement-cache-size>32</prepared-statement-cache-size>
+	        <share-prepared-statements/>
+	    </statement>
+	</datasource>
+</datasources>

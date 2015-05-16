@@ -1,0 +1,85 @@
+<div class="form-horizontal">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-sm-2">
+            <a id="Create" name="Create" class="btn btn-primary" href="#/CbsMahalles/new"><span class="glyphicon glyphicon-plus-sign"></span> Yeni Kayıt</a>
+        </div>
+    </div>
+</div>
+<hr/>
+<div style="font-size: 85%;">
+    <form id="CbsMahalleSearch" class="form-horizontal">
+        
+    <div class="form-group">
+        <label for="cbsIlce" class="col-sm-2 control-label">İlçe Adı</label>
+        <div class="col-sm-10">
+            <select id="cbsIlce" name="cbsIlce" class="form-control" ng-model="search.cbsIlce" ng-options="c as c.adi for c in cbsIlceList">
+                <option value="">İlçe seçiniz.</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <label for="adi" class="col-sm-2 control-label">Mahalle Adı</label>
+        <div class="col-sm-10">
+            <input id="adi" name="adi" class="form-control" type="text" ng-model="search.adi" placeholder="Mahalle adı giriniz."></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="stNo" class="col-sm-2 control-label">Tuik No</label>
+        <div class="col-sm-10">
+            <input id="stNo" name="stNo" class="form-control" type="text" ng-model="search.stNo" placeholder="Tuik no giriniz."></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="uavtNo" class="col-sm-2 control-label">Uavt No</label>
+        <div class="col-sm-10">
+            <input id="uavtNo" name="uavtNo" class="form-control" type="text" ng-model="search.uavtNo" placeholder="Uavt no giriniz."></input>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-sm-10">
+            <a id="Search" name="Search" class="btn btn-primary" ng-click="performSearch()"><span class="glyphicon glyphicon-search"></span> Ara</a>
+        </div>
+    </div>
+    
+    </form>
+</div>
+<div id="search-results" style="font-size: 75%;">
+        <div class="table-responsive">
+        <table class="table table-responsive table-bordered table-striped clearfix">
+            <thead>
+                <tr>
+                    <th style="width: 70px">İlçe Adı</th>
+                    <th style="width: 70px">Mahalle Adı</th>
+                    <th style="width: 30px">Tuik No</th>
+                    <th style="width: 30px">Uavt No</th>
+                </tr>
+            </thead>
+            <tbody id="search-results-body">
+                <tr ng-repeat="result in searchResults | searchFilter:searchResults | startFrom:currentPage*pageSize | limitTo:pageSize">
+                	<td><a href="#/CbsMahalles/edit/{{result.id}}">{{result.cbsIlce.adi}}</a></td>
+                    <td><a href="#/CbsMahalles/edit/{{result.id}}">{{result.adi}}</a></td>
+                    <td><a href="#/CbsMahalles/edit/{{result.id}}">{{result.stNo}}</a></td>
+                    <td><a href="#/CbsMahalles/edit/{{result.id}}">{{result.uavtNo}}</a></td>
+                        
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+        <ul class="pagination pagination-centered">
+        <li ng-class="{disabled:currentPage == 0}">
+            <a id="prev" href ng-click="previous()">«</a>
+        </li>
+        <li ng-repeat="n in pageRange" ng-class="{active:currentPage == n}" ng-click="setPage(n)">
+            <a href ng-bind="n + 1">1</a>
+        </li>
+        <li ng-class="{disabled: currentPage == (numberOfPages() - 1)}">
+            <a id="next" href ng-click="next()">»</a>
+        </li>
+    </ul>
+
+</div>
