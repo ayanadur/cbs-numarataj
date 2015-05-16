@@ -107,7 +107,7 @@ angular.module('app').controller('SearchCbsResimController', function($scope, $h
     };  
     
     $scope.cancel = function() {
-        //$location.path("/CbsBinas/edit/"+$scope.binaId);
+        $location.path("/CbsBinas/edit/"+$scope.binaId);
     };
     
     

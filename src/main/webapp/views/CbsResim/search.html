@@ -80,6 +80,7 @@
             <button id="savecbsResim" name="savecbsResim" class="btn btn-primary" ng-disabled="CbsResimForm.$invalid || cbsResim.id" ng-click="cbsResim.id != null ? update() : saveFile();"><span class="glyphicon glyphicon-ok-sign"></span> Kaydet</button>
             <button id="newcbsResim" name="newcbsResim" class="btn btn-primary" ng-disabled="!cbsResim.id" ng-click="newKayit()"><span class="glyphicon glyphicon-ok-sign"></span> Yeni</button>
             <button id="deleteCbsResim" name="deleteCbsResim" class="btn btn-danger" ng-show="cbsResim.id" ng-click="remove(cbsResim.id)"><span class="glyphicon glyphicon-trash"></span> Sil</button>
+            <button id="cancel" name="cancel" class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove-sign"></span> Vazgeç</button>
         </div>
     </div>
        
